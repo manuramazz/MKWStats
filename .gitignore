@@ -48,3 +48,5 @@ app.*.map.json
 
 # Supabase credentials for local dart-define
 /env.json
+
+apuntes.md
