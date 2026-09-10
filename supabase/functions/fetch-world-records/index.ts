@@ -19,6 +19,9 @@ const COL_DATE = 2
 const COL_TRACK = 3
 const COL_TIME_MS = 4
 const COL_VIDEO = 7
+const COL_KART = 10
+const COL_CHARACTER = 15
+
 
 Deno.serve(async (_req: Request) => {
   try {
@@ -44,6 +47,8 @@ Deno.serve(async (_req: Request) => {
       date: string
       timeMs: number
       videoUrl: string | null
+      character: string | null
+      kart: string | null
     }
     const latestByTrack = new Map<string, LatestRecord>()
 
@@ -60,6 +65,8 @@ Deno.serve(async (_req: Request) => {
           date,
           timeMs,
           videoUrl: row[COL_VIDEO] || null,
+          character: row[COL_CHARACTER] || null,
+          kart: row[COL_KART] || null
         })
       }
     }
@@ -83,6 +90,8 @@ Deno.serve(async (_req: Request) => {
       time_ms: number
       record_date: string
       video_url: string | null
+      character: string | null
+      kart: string | null
       updated_at: string
     }> = []
     const notFound: string[] = []
@@ -99,6 +108,8 @@ Deno.serve(async (_req: Request) => {
         time_ms: record.timeMs,
         record_date: record.date,
         video_url: record.videoUrl,
+        character: record.character,
+        kart: record.kart,
         updated_at: new Date().toISOString(),
       })
     }
