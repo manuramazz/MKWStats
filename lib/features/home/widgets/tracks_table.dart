@@ -175,19 +175,19 @@ class TracksTableRows extends StatelessWidget {
   Widget build(BuildContext context) {
     final wrByTrack = {for (final wr in worldRecords) wr.trackId: wr};
 
-    return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.tableDark,
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
-      ),
+    return ClipRRect(
+      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
       child: Column(
         children: [
-          for (final track in tracks)
+          for (var i = 0; i < tracks.length; i++)
             _TrackRow(
-              track: track,
-              worldRecord: wrByTrack[track.id],
-              personalBestMs: bestTimesByTrack[track.id],
-              onTap: () => onTrackTap(track),
+              track: tracks[i],
+              worldRecord: wrByTrack[tracks[i].id],
+              personalBestMs: bestTimesByTrack[tracks[i].id],
+              onTap: () => onTrackTap(tracks[i]),
+              backgroundColor: i.isEven
+                  ? AppColors.tableDark
+                  : AppColors.tableDarkSec,
             ),
         ],
       ),
@@ -200,83 +200,93 @@ class _TrackRow extends StatelessWidget {
   final WorldRecord? worldRecord;
   final int? personalBestMs;
   final VoidCallback onTap;
+  final Color backgroundColor;
 
   const _TrackRow({
     required this.track,
     this.worldRecord,
     this.personalBestMs,
     required this.onTap,
+    required this.backgroundColor,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(left: 15, top: 10, right: 8, bottom: 10),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 7,
-              child: Text(
-                track.name,
-                style: AppTextStyles.interRegular14(
-                  color: AppColors.white,
-                ).copyWith(fontSize: 11),
+    return Container(
+      color: backgroundColor,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            left: 15,
+            top: 10,
+            right: 8,
+            bottom: 10,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 7,
+                child: Text(
+                  track.name,
+                  style: AppTextStyles.interRegular14(
+                    color: AppColors.white,
+                  ).copyWith(fontSize: 11),
+                ),
               ),
-            ),
-            Expanded(
-              flex: 4,
-              child: Text(
-                personalBestMs == null
-                    ? 'No time set'
-                    : formatTimeMs(personalBestMs!),
-                style: AppTextStyles.interRegular14(
+              Expanded(
+                flex: 4,
+                child: Text(
+                  personalBestMs == null
+                      ? 'No time set'
+                      : formatTimeMs(personalBestMs!),
+                  style: AppTextStyles.interRegular14(
+                    color: AppColors.grayMuted,
+                  ).copyWith(fontSize: 12),
+                ),
+              ),
+              Expanded(
+                flex: 4,
+                child: personalBestMs == null || worldRecord == null
+                    ? Text(
+                        '—',
+                        style: AppTextStyles.interRegular14(
+                          color: AppColors.grayMuted,
+                        ).copyWith(fontSize: 12),
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            formatGapSeconds(
+                              personalBestMs! - worldRecord!.timeMs,
+                            ),
+                            style: AppTextStyles.interRegular14(
+                              color: AppColors.grayMuted,
+                            ).copyWith(fontSize: 12),
+                          ),
+                          Text(
+                            formatGapPercent(
+                              personalBestMs! - worldRecord!.timeMs,
+                              worldRecord!.timeMs,
+                            ),
+                            style: AppTextStyles.interRegular14(
+                              color: AppColors.grayMuted,
+                            ).copyWith(fontSize: 12),
+                          ),
+                        ],
+                      ),
+              ),
+              const SizedBox(width: 1),
+              const SizedBox(
+                width: 24,
+                child: Icon(
+                  Icons.keyboard_double_arrow_right,
                   color: AppColors.grayMuted,
-                ).copyWith(fontSize: 12),
+                ),
               ),
-            ),
-            Expanded(
-              flex: 4,
-              child: personalBestMs == null || worldRecord == null
-                  ? Text(
-                      '—',
-                      style: AppTextStyles.interRegular14(
-                        color: AppColors.grayMuted,
-                      ).copyWith(fontSize: 12),
-                    )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          formatGapSeconds(
-                            personalBestMs! - worldRecord!.timeMs,
-                          ),
-                          style: AppTextStyles.interRegular14(
-                            color: AppColors.grayMuted,
-                          ).copyWith(fontSize: 12),
-                        ),
-                        Text(
-                          formatGapPercent(
-                            personalBestMs! - worldRecord!.timeMs,
-                            worldRecord!.timeMs,
-                          ),
-                          style: AppTextStyles.interRegular14(
-                            color: AppColors.grayMuted,
-                          ).copyWith(fontSize: 12),
-                        ),
-                      ],
-                    ),
-            ),
-            const SizedBox(width: 1),
-            const SizedBox(
-              width: 24,
-              child: Icon(
-                Icons.keyboard_double_arrow_right,
-                color: AppColors.grayMuted,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

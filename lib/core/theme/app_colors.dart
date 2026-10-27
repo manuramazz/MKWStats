@@ -8,6 +8,7 @@ class AppColors {
   static const signupNavbarBrown = Color(0xFF8E4B10);
   static const cardBrown = Color(0xFFB85931);
   static const tableDark = Color(0xFF111928);
+  static const tableDarkSec = Color.fromARGB(255, 21, 30, 46);
   static const pillInactive = Color(0xFF1F2A37);
   static const white = Color(0xFFFFFFFF);
   static const grayMuted = Color(0xFF9CA3AF);

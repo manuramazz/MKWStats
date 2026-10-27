@@ -50,7 +50,7 @@ class _LogoutModal extends StatelessWidget {
                     ),
                     child: Text(
                       'No, cancel',
-                      style: AppTextStyles.bangers20(color: AppColors.white),
+                      style: AppTextStyles.bangers18(color: AppColors.white),
                     ),
                   ),
                 ),
