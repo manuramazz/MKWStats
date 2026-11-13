@@ -1,6 +1,6 @@
 {
-    "name": "mkwstats",
-    "short_name": "mkwstats",
+    "name": "MKWorld Stats",
+    "short_name": "MKWorld Stats",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

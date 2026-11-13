@@ -43,6 +43,9 @@ final appRouter = GoRouter(
       path: '/register',
       builder: (context, state) => RegisterScreen(
         initialBuildType: state.extra as BuildType? ?? BuildType.optimal,
+        initialTrackId: int.tryParse(
+          state.uri.queryParameters['trackId'] ?? '',
+        ),
       ),
     ),
     GoRoute(

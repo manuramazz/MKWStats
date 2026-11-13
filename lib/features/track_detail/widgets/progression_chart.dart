@@ -114,8 +114,8 @@ class ProgressionChart extends StatelessWidget {
                       ),
                       LineChartBarData(
                         spots: spots,
-                        color: Colors.transparent,
-                        barWidth: 0,
+                        color: AppColors.gold,
+                        barWidth: 2,
                         dotData: FlDotData(
                           show: true,
                           getDotPainter: (spot, percent, bar, index) =>

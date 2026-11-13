@@ -7,6 +7,10 @@ import '../../../core/utils/time_format.dart';
 import '../../../data/models/personal_time.dart';
 
 class MyTimesTable extends StatelessWidget {
+  /// Inner horizontal padding: the table is laid out edge-to-edge in its
+  /// section, so text is inset here to align with the section title.
+  static const _hPadding = 12.0;
+
   final List<PersonalTime> times;
   final int? wrTimeMs;
 
@@ -38,9 +42,12 @@ class MyTimesTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (times.isEmpty) {
-      return Text(
-        'Aún no tienes tiempos registrados en este circuito',
-        style: AppTextStyles.interRegular14(color: AppColors.grayMuted),
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: _hPadding),
+        child: Text(
+          'Aún no tienes tiempos registrados en este circuito',
+          style: AppTextStyles.interRegular14(color: AppColors.grayMuted),
+        ),
       );
     }
 
@@ -48,14 +55,17 @@ class MyTimesTable extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          children: [
-            _headerCell('Time', 3),
-            _headerCell('Improvement', 3),
-            _headerCell('Gap (s)', 2),
-            _headerCell('Gap (%)', 2),
-            _headerCell('Date', 3),
-          ],
+        Padding(
+          padding: const EdgeInsets.fromLTRB(_hPadding, 0, _hPadding, 6),
+          child: Row(
+            children: [
+              _headerCell('Time', 3),
+              _headerCell('Improv.', 3),
+              _headerCell('Gap (s)', 2),
+              _headerCell('Gap (%)', 2),
+              _headerCell('Date', 3),
+            ],
+          ),
         ),
         for (var i = 0; i < rows.length; i++) _buildRow(rows[i], i),
       ],
@@ -108,7 +118,7 @@ class MyTimesTable extends StatelessWidget {
 
     return Container(
       color: rowColor,
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: _hPadding, vertical: 8),
       child: Row(
         children: [
           Expanded(
@@ -126,7 +136,7 @@ class MyTimesTable extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              gapMs == null ? '—' : formatGapSeconds(gapMs),
+              gapMs == null ? '—' : formatGapSeconds(gapMs, withUnit: false),
               style: AppTextStyles.interRegular14(
                 color: AppColors.grayLight,
               ).copyWith(fontSize: 12),
@@ -144,7 +154,7 @@ class MyTimesTable extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Text(
-              '${row.time.recordDate.day}/${row.time.recordDate.month.toString().padLeft(2, '0')}/${row.time.recordDate.year}',
+              formatShortDate(row.time.recordDate),
               style: AppTextStyles.interRegular14(
                 color: AppColors.grayLight,
               ).copyWith(fontSize: 12),

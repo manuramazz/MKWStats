@@ -9,7 +9,7 @@ class MkwStatsApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'MKWStats',
+      title: 'MKWorld Stats',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.theme,
       routerConfig: appRouter,

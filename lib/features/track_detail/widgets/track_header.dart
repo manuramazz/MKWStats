@@ -22,14 +22,13 @@ class TrackHeader extends StatelessWidget {
           height: 70,
           borderRadius: BorderRadius.circular(8),
         ),
-        const SizedBox(width: 12),
+        SizedBox(width: MediaQuery.sizeOf(context).width * 0.1),
         Expanded(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 track.name.toUpperCase(),
-                textAlign: TextAlign.center,
                 style: AppTextStyles.bangers(
                   fontSize: 20,
                   color: AppColors.grayLight,
@@ -37,7 +36,6 @@ class TrackHeader extends StatelessWidget {
               ),
               const SizedBox(height: 6),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   AssetImageOrFallback(

@@ -19,7 +19,14 @@ import 'widgets/track_picker_sheet.dart';
 class RegisterScreen extends StatefulWidget {
   final BuildType initialBuildType;
 
-  const RegisterScreen({super.key, required this.initialBuildType});
+  /// Pre-selects this track when opened from a track detail page.
+  final int? initialTrackId;
+
+  const RegisterScreen({
+    super.key,
+    required this.initialBuildType,
+    this.initialTrackId,
+  });
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -66,6 +73,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {
       _tracks = tracks;
       _worldRecords = worldRecords;
+      _selectedTrack = tracks
+          .where((t) => t.id == widget.initialTrackId)
+          .firstOrNull;
       _isLoading = false;
     });
   }

@@ -7,8 +7,14 @@ import '../../../data/models/build_type.dart';
 class ComboToggle extends StatelessWidget {
   final BuildType value;
   final ValueChanged<BuildType> onChanged;
+  final double fontSize;
 
-  const ComboToggle({super.key, required this.value, required this.onChanged});
+  const ComboToggle({
+    super.key,
+    required this.value,
+    required this.onChanged,
+    this.fontSize = 15,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +25,7 @@ class ComboToggle extends StatelessWidget {
             icon: Icons.bolt,
             label: 'Time Trial combo',
             isActive: value == BuildType.optimal,
+            fontSize: fontSize,
             onTap: () => onChanged(BuildType.optimal),
           ),
         ),
@@ -28,6 +35,7 @@ class ComboToggle extends StatelessWidget {
             icon: Icons.wifi,
             label: 'online meta combo',
             isActive: value == BuildType.meta,
+            fontSize: fontSize,
             onTap: () => onChanged(BuildType.meta),
           ),
         ),
@@ -40,12 +48,14 @@ class _ComboOption extends StatelessWidget {
   final IconData icon;
   final String label;
   final bool isActive;
+  final double fontSize;
   final VoidCallback onTap;
 
   const _ComboOption({
     required this.icon,
     required this.label,
     required this.isActive,
+    required this.fontSize,
     required this.onTap,
   });
 
@@ -71,7 +81,7 @@ class _ComboOption extends StatelessWidget {
             Flexible(
               child: Text(
                 label,
-                style: AppTextStyles.bangers15(color: color),
+                style: AppTextStyles.bangers(fontSize: fontSize, color: color),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

@@ -90,7 +90,7 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
 
   Future<void> _openRegister() async {
     final savedBuildType = await context.push<BuildType>(
-      '/register',
+      '/register?trackId=${widget.trackId}',
       extra: _buildType,
     );
     if (savedBuildType != null) {
@@ -123,11 +123,11 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
                           color: AppColors.white,
                         ),
                       ),
-                      const Spacer(),
-                      SizedBox(
-                        width: 200,
+                      const SizedBox(width: 24),
+                      Expanded(
                         child: ComboToggle(
                           value: _buildType,
+                          fontSize: 13,
                           onChanged: (value) {
                             setState(() => _buildType = value);
                             _loadPersonalTimes();
@@ -152,6 +152,7 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
                           TrackStatsRow(
                             personalBestMs: _personalBestMs,
                             wrTimeMs: _worldRecord?.timeMs,
+                            wrPlayerName: _worldRecord?.playerName,
                           ),
                           const SizedBox(height: 12),
                           WrBuildStrip(
@@ -171,6 +172,11 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
                           CollapsibleSection(
                             title: 'My times',
                             initiallyExpanded: false,
+                            // Table rows span the full section width;
+                            // MyTimesTable handles its own horizontal padding.
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 12,
+                            ),
                             child: MyTimesTable(
                               times: _personalTimes,
                               wrTimeMs: _worldRecord?.timeMs,

@@ -7,12 +7,14 @@ class CollapsibleSection extends StatefulWidget {
   final String title;
   final bool initiallyExpanded;
   final Widget child;
+  final EdgeInsetsGeometry contentPadding;
 
   const CollapsibleSection({
     super.key,
     required this.title,
     required this.initiallyExpanded,
     required this.child,
+    this.contentPadding = const EdgeInsets.all(12),
   });
 
   @override
@@ -71,7 +73,7 @@ class _CollapsibleSectionState extends State<CollapsibleSection> {
               ? Container(
                   width: double.infinity,
                   color: AppColors.pillInactive,
-                  padding: const EdgeInsets.all(12),
+                  padding: widget.contentPadding,
                   child: widget.child,
                 )
               : const SizedBox(width: double.infinity),

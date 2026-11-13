@@ -7,11 +7,13 @@ import '../../../core/utils/time_format.dart';
 class TrackStatsRow extends StatelessWidget {
   final int? personalBestMs;
   final int? wrTimeMs;
+  final String? wrPlayerName;
 
   const TrackStatsRow({
     super.key,
     required this.personalBestMs,
     required this.wrTimeMs,
+    required this.wrPlayerName,
   });
 
   @override
@@ -35,9 +37,27 @@ class TrackStatsRow extends StatelessWidget {
           Expanded(
             child: _StatBox(
               label: 'WR',
-              child: Text(
-                wrTimeMs == null ? 'No disponible' : formatTimeMs(wrTimeMs!),
-                style: AppTextStyles.interRegular14(color: AppColors.grayLight),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    wrTimeMs == null
+                        ? 'No disponible'
+                        : formatTimeMs(wrTimeMs!),
+                    style: AppTextStyles.interRegular14(
+                      color: AppColors.grayLight,
+                    ),
+                  ),
+                  if (wrPlayerName != null)
+                    Text(
+                      'by $wrPlayerName',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.interRegular14(
+                        color: AppColors.grayMuted,
+                      ).copyWith(fontSize: 12),
+                    ),
+                ],
               ),
             ),
           ),

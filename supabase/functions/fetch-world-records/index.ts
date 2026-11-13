@@ -35,13 +35,17 @@ Deno.serve(async (_req: Request) => {
     if (!res.ok) {
       throw new Error(`No se pudo descargar el CSV: ${res.status}`)
     }
-    const csvText = await res.text()
+    // El CSV es un volcado de MySQL: escapa las comillas como \" en vez de
+    // "" (RFC 4180), lo que rompe el parser. Se normaliza antes de parsear.
+    const csvText = (await res.text()).replaceAll('\\"', '""')
 
     // 2. Parsear el CSV (sin cabecera, valores entre comillas)
     const rows = parse(csvText, { skipFirstRow: false }) as string[][]
 
-    // 3. Quedarnos con el registro mas reciente (= record actual) de
-    // cada circuito. El CSV es el historial completo de progresion.
+    // 3. Quedarnos con el record actual de cada circuito = el tiempo mas
+    // bajo del historial. No sirve "la fecha mas reciente": hay varios
+    // records el mismo dia y el primero que aparece no es el mas rapido.
+    // En empate de tiempo gana la fecha mas antigua (quien lo hizo primero).
     type LatestRecord = {
       player: string
       date: string
@@ -59,7 +63,11 @@ Deno.serve(async (_req: Request) => {
       if (!track || !date || Number.isNaN(timeMs)) continue
 
       const current = latestByTrack.get(track)
-      if (!current || date > current.date) {
+      if (
+        !current ||
+        timeMs < current.timeMs ||
+        (timeMs === current.timeMs && date < current.date)
+      ) {
         latestByTrack.set(track, {
           player: row[COL_PLAYER],
           date,
