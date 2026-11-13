@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
-import '../../data/repositories/auth_repository.dart';
+import '../../core/i18n/i18n.dart';
 
-Future<void> showLogoutModal(BuildContext context) {
-  return showDialog(
+/// Pide confirmación para cerrar sesión. Devuelve `true` si el usuario
+/// confirma; quien llama se encarga de cerrar la sesión.
+Future<bool> confirmLogout(BuildContext context) async {
+  final confirmed = await showDialog<bool>(
     context: context,
     builder: (context) => const _LogoutModal(),
   );
+  return confirmed ?? false;
 }
 
 class _LogoutModal extends StatelessWidget {
@@ -30,7 +33,7 @@ class _LogoutModal extends StatelessWidget {
             const Icon(Icons.error_outline, color: AppColors.white, size: 40),
             const SizedBox(height: 16),
             Text(
-              'Are you sure you want to log out?',
+              t('session.log_out_confirm'),
               textAlign: TextAlign.center,
               style: AppTextStyles.interRegular14(
                 color: const Color(0xFFF3F4F6),
@@ -41,7 +44,7 @@ class _LogoutModal extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                    onPressed: () => Navigator.of(context).pop(false),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.white),
                       shape: RoundedRectangleBorder(
@@ -49,7 +52,7 @@ class _LogoutModal extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'No, cancel',
+                      t('session.log_out_cancel'),
                       style: AppTextStyles.bangers18(color: AppColors.white),
                     ),
                   ),
@@ -57,10 +60,7 @@ class _LogoutModal extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () async {
-                      Navigator.of(context).pop();
-                      await AuthRepository().signOut();
-                    },
+                    onPressed: () => Navigator.of(context).pop(true),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.dangerRed,
                       shape: RoundedRectangleBorder(
@@ -68,7 +68,7 @@ class _LogoutModal extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'YES',
+                      t('session.log_out_yes'),
                       style: AppTextStyles.bangers20(color: AppColors.white),
                     ),
                   ),

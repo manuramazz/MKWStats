@@ -39,6 +39,8 @@ supabase functions serve fetch-world-records   # local
 - `core/` — theme (`AppColors`, `AppTextStyles`, `AppTheme`), shared widgets, and utils (`time_format.dart` for `time_ms` ↔ display string, `improvement_color.dart`).
 - `routing/app_router.dart` — single global `GoRouter`. Redirect guards on `supabase.auth.currentSession` and refreshes on `onAuthStateChange`, so sign-in/sign-out navigation happens automatically. `BuildType` is passed between routes via `extra`; `/register` pops a `BuildType` back to the caller, which reloads its data after `push` returns.
 
+**i18n**: every user-visible string goes through `t('section.key', {'param': v})` from `lib/core/i18n/i18n.dart`, with texts in `locale/en.json` and `locale/es.json` (nested JSON, dotted keys, `{param}` placeholders; both files must have the same keys). Language = saved choice (`shared_preferences`) or device language (es → es, else en). `t()` is context-free, so `MkwStatsApp` marks the whole element tree dirty on language change; widgets need nothing extra. Track/cup names come from the DB and are not translated.
+
 **Auth model**: username + password only. `AuthRepository` maps usernames to fake emails `<username>@mkwstats.local` for Supabase Auth and passes `username` in user metadata. A DB trigger `handle_new_user()` creates the `profiles` row. `is_username_taken` is a `security definer` RPC callable by `anon` (used before sign-up).
 
 **BuildType / "combo"**: every personal time belongs to a build type (`optimal` | `meta`), stored as `personal_times.combo` (text). Most views are filtered by the currently selected build type.

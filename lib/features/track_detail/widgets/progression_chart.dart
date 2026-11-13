@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../data/models/personal_time.dart';
+import '../../../core/i18n/i18n.dart';
 
 class ProgressionChart extends StatelessWidget {
   final List<PersonalTime> times;
@@ -22,7 +23,7 @@ class ProgressionChart extends StatelessWidget {
         height: 120,
         child: Center(
           child: Text(
-            'Aún no tienes tiempos registrados en este circuito',
+            t('common.no_times_yet'),
             textAlign: TextAlign.center,
             style: AppTextStyles.interRegular14(color: AppColors.grayMuted),
           ),
@@ -54,7 +55,7 @@ class ProgressionChart extends StatelessWidget {
               RotatedBox(
                 quarterTurns: 3,
                 child: Text(
-                  'Gap to WR',
+                  t('track_detail.gap_to_wr'),
                   style: AppTextStyles.interRegular14(
                     color: AppColors.grayMuted,
                   ),
@@ -134,7 +135,7 @@ class ProgressionChart extends StatelessWidget {
         ),
         Center(
           child: Text(
-            'Date',
+            t('common.date'),
             style: AppTextStyles.interRegular14(color: AppColors.grayMuted),
           ),
         ),

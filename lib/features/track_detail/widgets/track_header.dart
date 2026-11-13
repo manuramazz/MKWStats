@@ -4,6 +4,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/widgets/asset_image_or_fallback.dart';
 import '../../../data/models/track.dart';
+import '../../../core/i18n/i18n.dart';
 
 class TrackHeader extends StatelessWidget {
   final Track track;
@@ -47,7 +48,7 @@ class TrackHeader extends StatelessWidget {
                   ),
                   const SizedBox(width: 6),
                   Text(
-                    (track.cup ?? 'No disponible').toUpperCase(),
+                    (track.cup ?? t('common.not_available')).toUpperCase(),
                     style: AppTextStyles.bangers(
                       fontSize: 16,
                       color: AppColors.grayMuted,

@@ -4,6 +4,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../data/models/track.dart';
 import '../../../data/models/world_record.dart';
+import '../../../core/i18n/i18n.dart';
 
 class StatsAlertCard extends StatelessWidget {
   final List<Track> tracks;
@@ -73,9 +74,9 @@ class StatsAlertCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _label('Completed tracks'),
-                  _label('Average gap to WR'),
-                  _label('Best track'),
+                  _label(t('home.completed_tracks')),
+                  _label(t('home.average_gap')),
+                  _label(t('home.best_track')),
                 ],
               ),
             ),

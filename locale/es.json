@@ -1,0 +1,74 @@
+{
+  "common": {
+    "not_available": "No disponible",
+    "image_not_available": "Imagen no disponible",
+    "no_time_set": "Sin tiempo",
+    "no_times_yet": "Aún no tienes tiempos registrados en este circuito",
+    "time": "Tiempo",
+    "date": "Fecha",
+    "today": "Hoy",
+    "gap": "Gap"
+  },
+  "language": {
+    "es": "es",
+    "en": "en"
+  },
+  "auth": {
+    "sign_up": "Registrarse",
+    "log_in": "Entrar",
+    "nickname": "Usuario",
+    "password": "Contraseña",
+    "confirm_password": "Confirmar contraseña",
+    "error_username_required": "El nombre de usuario es obligatorio",
+    "error_password_required": "La contraseña es obligatoria",
+    "error_passwords_mismatch": "Las contraseñas no coinciden",
+    "error_username_taken": "Ese nombre de usuario ya existe",
+    "error_password_too_short": "La contraseña debe tener al menos 6 caracteres",
+    "error_signup_failed": "No se pudo completar el registro",
+    "error_invalid_credentials": "Usuario o contraseña incorrectos"
+  },
+  "home": {
+    "time_trials": "CONTRARRELOJ",
+    "online": "ONLINE",
+    "combo_time_trial": "Combo contrarreloj",
+    "combo_online_meta": "Combo meta online",
+    "completed_tracks": "Circuitos completados",
+    "average_gap": "Gap medio al WR",
+    "best_track": "Mejor circuito",
+    "col_track": "CIRCUITO",
+    "col_best_time": "MEJOR TIEMPO",
+    "col_gap": "GAP",
+    "coming_soon": "Próximamente"
+  },
+  "register": {
+    "cancel": "CANCELAR",
+    "save": "GUARDAR",
+    "track": "Circuito",
+    "track_wr": "WR del circuito - {time}",
+    "pb": "PB - {time}",
+    "error_select_track": "Selecciona un circuito",
+    "error_invalid_time": "Formato de tiempo inválido"
+  },
+  "track_detail": {
+    "personal_best": "Mejor marca",
+    "wr": "WR",
+    "wr_by": "por {player}",
+    "wr_build": "Build del WR",
+    "progression": "Progresión",
+    "my_times": "Mis tiempos",
+    "wr_video": "Vídeo del WR",
+    "gap_to_wr": "Gap al WR",
+    "video_not_available": "Vídeo no disponible",
+    "col_improvement": "Mejora",
+    "col_gap_seconds": "Gap (s)",
+    "col_gap_percent": "Gap (%)"
+  },
+  "session": {
+    "settings": "Ajustes",
+    "logged_in_as": "Sesión iniciada como",
+    "log_out": "Cerrar sesión",
+    "log_out_confirm": "¿Seguro que quieres cerrar sesión?",
+    "log_out_cancel": "No, cancelar",
+    "log_out_yes": "SÍ"
+  }
+}

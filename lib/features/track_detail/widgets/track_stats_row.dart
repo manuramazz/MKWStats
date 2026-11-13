@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/time_format.dart';
+import '../../../core/i18n/i18n.dart';
 
 class TrackStatsRow extends StatelessWidget {
   final int? personalBestMs;
@@ -24,10 +25,10 @@ class TrackStatsRow extends StatelessWidget {
         children: [
           Expanded(
             child: _StatBox(
-              label: 'Personal Best',
+              label: t('track_detail.personal_best'),
               child: Text(
                 personalBestMs == null
-                    ? 'No time set'
+                    ? t('common.no_time_set')
                     : formatTimeMs(personalBestMs!),
                 style: AppTextStyles.interRegular14(color: AppColors.grayLight),
               ),
@@ -36,13 +37,13 @@ class TrackStatsRow extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: _StatBox(
-              label: 'WR',
+              label: t('track_detail.wr'),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     wrTimeMs == null
-                        ? 'No disponible'
+                        ? t('common.not_available')
                         : formatTimeMs(wrTimeMs!),
                     style: AppTextStyles.interRegular14(
                       color: AppColors.grayLight,
@@ -50,7 +51,7 @@ class TrackStatsRow extends StatelessWidget {
                   ),
                   if (wrPlayerName != null)
                     Text(
-                      'by $wrPlayerName',
+                      t('track_detail.wr_by', {'player': wrPlayerName}),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTextStyles.interRegular14(
@@ -63,7 +64,7 @@ class TrackStatsRow extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: _StatBox(label: 'Gap', child: _buildGap()),
+            child: _StatBox(label: t('common.gap'), child: _buildGap()),
           ),
         ],
       ),

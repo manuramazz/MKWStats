@@ -166,13 +166,12 @@ class _MainScreenState extends State<MainScreen>
         top: false,
         child: Column(
           children: [
-            Container(
-              color: AppColors.navbarBrown,
+            Padding(
               padding: EdgeInsets.only(
                 left: 16,
                 right: 16,
-                top: MediaQuery.paddingOf(context).top + 15,
-                bottom: 16,
+                top: MediaQuery.paddingOf(context).top + 8,
+                bottom: 4,
               ),
               child: Row(
                 children: [
@@ -195,7 +194,7 @@ class _MainScreenState extends State<MainScreen>
             ),
             if (!_isLoading && _tabController.index == 0)
               Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                 child: ComboToggle(
                   value: _buildType,
                   onChanged: (value) {
@@ -262,7 +261,7 @@ class _TimeTrialsPage extends StatelessWidget {
       controller: scrollController,
       slivers: [
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+          padding: const EdgeInsets.fromLTRB(16, 10, 16, 16),
           sliver: SliverToBoxAdapter(
             child: StatsAlertCard(
               tracks: tracks,

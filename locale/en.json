@@ -1,0 +1,74 @@
+{
+  "common": {
+    "not_available": "Not available",
+    "image_not_available": "Image not available",
+    "no_time_set": "No time set",
+    "no_times_yet": "You have no times registered on this track yet",
+    "time": "Time",
+    "date": "Date",
+    "today": "Today",
+    "gap": "Gap"
+  },
+  "language": {
+    "es": "en",
+    "en": "es"
+  },
+  "auth": {
+    "sign_up": "Sign Up",
+    "log_in": "Log In",
+    "nickname": "Nickname",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "error_username_required": "Username is required",
+    "error_password_required": "Password is required",
+    "error_passwords_mismatch": "Passwords do not match",
+    "error_username_taken": "That username already exists",
+    "error_password_too_short": "Password must be at least 6 characters",
+    "error_signup_failed": "Sign up could not be completed",
+    "error_invalid_credentials": "Incorrect username or password"
+  },
+  "home": {
+    "time_trials": "TIME TRIALS",
+    "online": "ON LINE",
+    "combo_time_trial": "Time Trial combo",
+    "combo_online_meta": "online meta combo",
+    "completed_tracks": "Completed tracks",
+    "average_gap": "Average gap to WR",
+    "best_track": "Best track",
+    "col_track": "TRACK",
+    "col_best_time": "BEST TIME",
+    "col_gap": "GAP",
+    "coming_soon": "Coming soon"
+  },
+  "register": {
+    "cancel": "CANCEL",
+    "save": "SAVE",
+    "track": "Track",
+    "track_wr": "Track WR - {time}",
+    "pb": "PB - {time}",
+    "error_select_track": "Select a track",
+    "error_invalid_time": "Invalid time format"
+  },
+  "track_detail": {
+    "personal_best": "Personal Best",
+    "wr": "WR",
+    "wr_by": "by {player}",
+    "wr_build": "WR build",
+    "progression": "Progression",
+    "my_times": "My times",
+    "wr_video": "WR video",
+    "gap_to_wr": "Gap to WR",
+    "video_not_available": "Video not available",
+    "col_improvement": "Improv.",
+    "col_gap_seconds": "Gap (s)",
+    "col_gap_percent": "Gap (%)"
+  },
+  "session": {
+    "settings": "Settings",
+    "logged_in_as": "Logged in as",
+    "log_out": "Log out",
+    "log_out_confirm": "Are you sure you want to log out?",
+    "log_out_cancel": "No, cancel",
+    "log_out_yes": "YES"
+  }
+}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
+import '../../core/i18n/i18n.dart';
 
 class OnlinePlaceholderScreen extends StatelessWidget {
   const OnlinePlaceholderScreen({super.key});
@@ -10,7 +11,7 @@ class OnlinePlaceholderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'Coming soon',
+        t('home.coming_soon'),
         style: AppTextStyles.bangers20(color: AppColors.white),
       ),
     );

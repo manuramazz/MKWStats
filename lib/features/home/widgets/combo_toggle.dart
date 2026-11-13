@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
 import '../../../data/models/build_type.dart';
+import '../../../core/i18n/i18n.dart';
 
 class ComboToggle extends StatelessWidget {
   final BuildType value;
@@ -23,7 +24,7 @@ class ComboToggle extends StatelessWidget {
         Expanded(
           child: _ComboOption(
             icon: Icons.bolt,
-            label: 'Time Trial combo',
+            label: t('home.combo_time_trial'),
             isActive: value == BuildType.optimal,
             fontSize: fontSize,
             onTap: () => onChanged(BuildType.optimal),
@@ -33,7 +34,7 @@ class ComboToggle extends StatelessWidget {
         Expanded(
           child: _ComboOption(
             icon: Icons.wifi,
-            label: 'online meta combo',
+            label: t('home.combo_online_meta'),
             isActive: value == BuildType.meta,
             fontSize: fontSize,
             onTap: () => onChanged(BuildType.meta),

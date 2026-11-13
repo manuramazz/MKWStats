@@ -21,6 +21,7 @@ import 'widgets/track_header.dart';
 import 'widgets/track_stats_row.dart';
 import 'widgets/wr_build_strip.dart';
 import 'widgets/wr_video_player.dart';
+import '../../core/i18n/i18n.dart';
 
 class TrackDetailScreen extends StatefulWidget {
   final int trackId;
@@ -107,11 +108,10 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
         top: false,
         child: Column(
           children: [
-            Container(
-              color: AppColors.navbarBrown,
+            Padding(
               padding: EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
               child: SizedBox(
-                height: 66,
+                height: 50,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
@@ -143,7 +143,7 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : SingleChildScrollView(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -161,7 +161,7 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
                           ),
                           const SizedBox(height: 16),
                           CollapsibleSection(
-                            title: 'Progression',
+                            title: t('track_detail.progression'),
                             initiallyExpanded: true,
                             child: ProgressionChart(
                               times: _personalTimes,
@@ -170,7 +170,7 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
                           ),
                           const SizedBox(height: 8),
                           CollapsibleSection(
-                            title: 'My times',
+                            title: t('track_detail.my_times'),
                             initiallyExpanded: false,
                             // Table rows span the full section width;
                             // MyTimesTable handles its own horizontal padding.
@@ -184,7 +184,7 @@ class _TrackDetailScreenState extends State<TrackDetailScreen> {
                           ),
                           const SizedBox(height: 8),
                           CollapsibleSection(
-                            title: 'WR video',
+                            title: t('track_detail.wr_video'),
                             initiallyExpanded: false,
                             child: WrVideoPlayer(
                               videoUrl: _worldRecord?.videoUrl,

@@ -5,6 +5,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_text_styles.dart';
 import '../../data/repositories/auth_repository.dart';
 import 'widgets/auth_text_field.dart';
+import '../../core/i18n/i18n.dart';
 
 enum _AuthMode { signUp, logIn }
 
@@ -58,18 +59,20 @@ class _AuthScreenState extends State<AuthScreen> {
     });
 
     if (nickname.isEmpty) {
-      setState(() => _nicknameError = 'El nombre de usuario es obligatorio');
+      setState(() => _nicknameError = t('auth.error_username_required'));
       return;
     }
     if (password.isEmpty) {
-      setState(() => _passwordError = 'La contraseña es obligatoria');
+      setState(() => _passwordError = t('auth.error_password_required'));
       return;
     }
 
     if (_mode == _AuthMode.signUp) {
       final confirmPassword = _confirmPasswordController.text;
       if (confirmPassword.isEmpty || confirmPassword != password) {
-        setState(() => _confirmPasswordError = 'Las contraseñas no coinciden');
+        setState(
+          () => _confirmPasswordError = t('auth.error_passwords_mismatch'),
+        );
         return;
       }
 
@@ -77,17 +80,14 @@ class _AuthScreenState extends State<AuthScreen> {
       try {
         final taken = await _authRepository.isUsernameTaken(nickname);
         if (taken) {
-          setState(() => _nicknameError = 'Ese nombre de usuario ya existe');
+          setState(() => _nicknameError = t('auth.error_username_taken'));
           return;
         }
         await _authRepository.signUp(username: nickname, password: password);
       } on AuthWeakPasswordException {
-        setState(
-          () =>
-              _passwordError = 'La contraseña debe tener al menos 6 caracteres',
-        );
+        setState(() => _passwordError = t('auth.error_password_too_short'));
       } catch (_) {
-        setState(() => _passwordError = 'No se pudo completar el registro');
+        setState(() => _passwordError = t('auth.error_signup_failed'));
       } finally {
         if (mounted) setState(() => _isSubmitting = false);
       }
@@ -96,9 +96,9 @@ class _AuthScreenState extends State<AuthScreen> {
       try {
         await _authRepository.signIn(username: nickname, password: password);
       } on AuthException {
-        setState(() => _passwordError = 'Usuario o contraseña incorrectos');
+        setState(() => _passwordError = t('auth.error_invalid_credentials'));
       } catch (_) {
-        setState(() => _passwordError = 'Usuario o contraseña incorrectos');
+        setState(() => _passwordError = t('auth.error_invalid_credentials'));
       } finally {
         if (mounted) setState(() => _isSubmitting = false);
       }
@@ -129,13 +129,13 @@ class _AuthScreenState extends State<AuthScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       _AuthTab(
-                        label: 'Sign Up',
+                        label: t('auth.sign_up'),
                         isActive: _mode == _AuthMode.signUp,
                         onTap: () => _switchMode(_AuthMode.signUp),
                       ),
                       const SizedBox(width: 32),
                       _AuthTab(
-                        label: 'Log In',
+                        label: t('auth.log_in'),
                         isActive: _mode == _AuthMode.logIn,
                         onTap: () => _switchMode(_AuthMode.logIn),
                       ),
@@ -158,13 +158,13 @@ class _AuthScreenState extends State<AuthScreen> {
                     child: Column(
                       children: [
                         AuthTextField(
-                          label: 'Nickname',
+                          label: t('auth.nickname'),
                           controller: _nicknameController,
                           errorText: _nicknameError,
                         ),
                         const SizedBox(height: 16),
                         AuthTextField(
-                          label: 'Password',
+                          label: t('auth.password'),
                           controller: _passwordController,
                           obscureText: true,
                           errorText: _passwordError,
@@ -172,7 +172,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         if (_mode == _AuthMode.signUp) ...[
                           const SizedBox(height: 16),
                           AuthTextField(
-                            label: 'Confirmar contraseña',
+                            label: t('auth.confirm_password'),
                             controller: _confirmPasswordController,
                             obscureText: true,
                             errorText: _confirmPasswordError,
@@ -201,8 +201,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                   )
                                 : Text(
                                     _mode == _AuthMode.signUp
-                                        ? 'Sign Up'
-                                        : 'Log In',
+                                        ? t('auth.sign_up')
+                                        : t('auth.log_in'),
                                     style: AppTextStyles.interMedium16(
                                       color: AppColors.white,
                                     ),

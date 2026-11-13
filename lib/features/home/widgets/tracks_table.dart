@@ -5,6 +5,7 @@ import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/time_format.dart';
 import '../../../data/models/track.dart';
 import '../../../data/models/world_record.dart';
+import '../../../core/i18n/i18n.dart';
 
 const double tracksTableHeaderHeight = 52;
 
@@ -38,7 +39,7 @@ class TracksTableHeader extends StatelessWidget {
                 Expanded(
                   flex: 9,
                   child: _HeaderCell(
-                    label: 'TRACK',
+                    label: t('home.col_track'),
                     column: TracksSortColumn.track,
                     activeColumn: sortColumn,
                     sortDirection: sortDirection,
@@ -48,7 +49,7 @@ class TracksTableHeader extends StatelessWidget {
                 Expanded(
                   flex: 6,
                   child: _HeaderCell(
-                    label: 'BEST TIME',
+                    label: t('home.col_best_time'),
                     column: TracksSortColumn.bestTime,
                     activeColumn: sortColumn,
                     sortDirection: sortDirection,
@@ -58,7 +59,7 @@ class TracksTableHeader extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: _HeaderCell(
-                    label: 'GAP',
+                    label: t('home.col_gap'),
                     column: TracksSortColumn.gap,
                     activeColumn: sortColumn,
                     sortDirection: sortDirection,
@@ -238,7 +239,7 @@ class _TrackRow extends StatelessWidget {
                 flex: 4,
                 child: Text(
                   personalBestMs == null
-                      ? 'No time set'
+                      ? t('common.no_time_set')
                       : formatTimeMs(personalBestMs!),
                   style: AppTextStyles.interRegular14(
                     color: AppColors.grayMuted,

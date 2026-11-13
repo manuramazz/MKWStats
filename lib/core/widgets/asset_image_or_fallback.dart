@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
 import '../theme/app_text_styles.dart';
+import '../i18n/i18n.dart';
 
 class AssetImageOrFallback extends StatelessWidget {
   final String? assetPath;
@@ -57,7 +58,7 @@ class AssetImageOrFallback extends StatelessWidget {
               size: width * 0.6,
             )
           : Text(
-              'Image not available',
+              t('common.image_not_available'),
               textAlign: TextAlign.center,
               style: AppTextStyles.interRegular14(
                 color: AppColors.grayMuted,

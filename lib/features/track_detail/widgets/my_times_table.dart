@@ -5,6 +5,7 @@ import '../../../core/theme/app_text_styles.dart';
 import '../../../core/utils/improvement_color.dart';
 import '../../../core/utils/time_format.dart';
 import '../../../data/models/personal_time.dart';
+import '../../../core/i18n/i18n.dart';
 
 class MyTimesTable extends StatelessWidget {
   /// Inner horizontal padding: the table is laid out edge-to-edge in its
@@ -45,7 +46,7 @@ class MyTimesTable extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: _hPadding),
         child: Text(
-          'Aún no tienes tiempos registrados en este circuito',
+          t('common.no_times_yet'),
           style: AppTextStyles.interRegular14(color: AppColors.grayMuted),
         ),
       );
@@ -59,11 +60,11 @@ class MyTimesTable extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(_hPadding, 0, _hPadding, 6),
           child: Row(
             children: [
-              _headerCell('Time', 3),
-              _headerCell('Improv.', 3),
-              _headerCell('Gap (s)', 2),
-              _headerCell('Gap (%)', 2),
-              _headerCell('Date', 3),
+              _headerCell(t('common.time'), 3),
+              _headerCell(t('track_detail.col_improvement'), 3),
+              _headerCell(t('track_detail.col_gap_seconds'), 2),
+              _headerCell(t('track_detail.col_gap_percent'), 2),
+              _headerCell(t('common.date'), 3),
             ],
           ),
         ),

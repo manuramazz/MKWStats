@@ -3,6 +3,7 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/i18n/i18n.dart';
 
 /// Miniatura del vídeo del WR; al tocarla abre el reproductor en un diálogo.
 ///
@@ -22,7 +23,7 @@ class WrVideoPlayer extends StatelessWidget {
         : YoutubePlayerController.convertUrlToId(url);
     if (videoId == null) {
       return Text(
-        'Vídeo no disponible',
+        t('track_detail.video_not_available'),
         style: AppTextStyles.interRegular14(color: AppColors.grayMuted),
       );
     }

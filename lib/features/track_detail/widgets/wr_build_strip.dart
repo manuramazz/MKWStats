@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/i18n/i18n.dart';
 
 class WrBuildStrip extends StatelessWidget {
   final String? character;
@@ -21,7 +22,7 @@ class WrBuildStrip extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'WR build',
+            t('track_detail.wr_build'),
             style: AppTextStyles.inter(
               fontSize: 11,
               fontWeight: FontWeight.w500,
@@ -33,7 +34,7 @@ class WrBuildStrip extends StatelessWidget {
           const SizedBox(width: 4),
           Flexible(
             child: Text(
-              character ?? 'No disponible',
+              character ?? t('common.not_available'),
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.interRegular14(
                 color: AppColors.grayLighter,
@@ -49,7 +50,7 @@ class WrBuildStrip extends StatelessWidget {
           const SizedBox(width: 4),
           Flexible(
             child: Text(
-              kart ?? 'No disponible',
+              kart ?? t('common.not_available'),
               overflow: TextOverflow.ellipsis,
               style: AppTextStyles.interRegular14(
                 color: AppColors.grayLighter,

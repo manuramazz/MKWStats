@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_text_styles.dart';
+import '../../../core/i18n/i18n.dart';
 
 class TopPagination extends StatelessWidget {
   final int activeIndex;
@@ -19,12 +20,12 @@ class TopPagination extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _PaginationPill(
-          label: 'TIME TRIALS',
+          label: t('home.time_trials'),
           isActive: activeIndex == 0,
           onTap: () => onChanged(0),
         ),
         _PaginationPill(
-          label: 'ON LINE',
+          label: t('home.online'),
           isActive: activeIndex == 1,
           onTap: () => onChanged(1),
         ),

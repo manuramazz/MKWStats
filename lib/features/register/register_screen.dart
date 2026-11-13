@@ -15,6 +15,7 @@ import '../../data/repositories/world_records_repository.dart';
 import '../../data/supabase_client.dart';
 import '../home/widgets/combo_toggle.dart';
 import 'widgets/track_picker_sheet.dart';
+import '../../core/i18n/i18n.dart';
 
 class RegisterScreen extends StatefulWidget {
   final BuildType initialBuildType;
@@ -126,13 +127,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
     });
 
     if (_selectedTrack == null) {
-      setState(() => _trackError = 'Selecciona un circuito');
+      setState(() => _trackError = t('register.error_select_track'));
       return;
     }
 
     final timeMs = _parseTimeToMs(_timeController.text);
     if (timeMs == null) {
-      setState(() => _timeError = 'Formato de tiempo inválido');
+      setState(() => _timeError = t('register.error_invalid_time'));
       return;
     }
 
@@ -175,25 +176,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
         top: false,
         child: Column(
           children: [
-            Container(
-              color: AppColors.navbarBrown,
+            Padding(
               padding: EdgeInsets.only(
                 left: 16,
                 right: 16,
-                top: MediaQuery.paddingOf(context).top + 22,
-                bottom: 22,
+                top: MediaQuery.paddingOf(context).top + 10,
+                bottom: 4,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _NavbarButton(
-                    label: 'CANCELAR',
+                    label: t('register.cancel'),
                     backgroundColor: AppColors.tableDark,
                     textColor: AppColors.grayMuted,
                     onTap: () => context.pop(),
                   ),
                   _NavbarButton(
-                    label: 'GUARDAR',
+                    label: t('register.save'),
                     backgroundColor: AppColors.pillInactive,
                     textColor: AppColors.white,
                     onTap: _isSaving ? null : _save,
@@ -211,7 +211,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Track',
+                        t('register.track'),
                         style: AppTextStyles.interMedium14(
                           color: AppColors.white,
                         ),
@@ -259,13 +259,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       if (_selectedTrack != null) ...[
                         const SizedBox(height: 4),
                         Text(
-                          'Track WR - ${wr == null ? 'No time set' : formatTimeMs(wr.timeMs)}',
+                          t('register.track_wr', {
+                            'time': wr == null
+                                ? t('common.no_time_set')
+                                : formatTimeMs(wr.timeMs),
+                          }),
                           style: AppTextStyles.interMedium14(
                             color: AppColors.grayMuted,
                           ),
                         ),
                         Text(
-                          'PB - ${pbMs == null ? 'No time set' : formatTimeMs(pbMs)}',
+                          t('register.pb', {
+                            'time': pbMs == null
+                                ? t('common.no_time_set')
+                                : formatTimeMs(pbMs),
+                          }),
                           style: AppTextStyles.interMedium14(
                             color: AppColors.grayMuted,
                           ),
@@ -273,7 +281,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                       const SizedBox(height: 16),
                       Text(
-                        'Time',
+                        t('common.time'),
                         style: AppTextStyles.interMedium14(
                           color: AppColors.white,
                         ),
@@ -318,7 +326,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                       const SizedBox(height: 16),
                       Text(
-                        'Date',
+                        t('common.date'),
                         style: AppTextStyles.interMedium14(
                           color: AppColors.white,
                         ),
@@ -341,7 +349,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               Expanded(
                                 child: Text(
                                   _selectedDate == null
-                                      ? 'Today'
+                                      ? t('common.today')
                                       : '${_selectedDate!.day.toString().padLeft(2, '0')}/'
                                             '${_selectedDate!.month.toString().padLeft(2, '0')}/'
                                             '${_selectedDate!.year}',
